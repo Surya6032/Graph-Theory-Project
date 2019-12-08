@@ -1,0 +1,91 @@
+// referenced old code, and cplusplus.com to build this 
+
+
+#include <iostream>
+
+using namespace std;
+
+class Queue
+{
+private:
+    struct Node {int item; struct Node * next;}; //MW
+    Node * front;
+    Node * rear;
+    int count;
+    
+public:
+    Queue();
+    ~Queue();
+    int enqueue(const int &item); //MW
+    int dequeue();//MW
+    bool full();//MW
+    bool empty();//MW
+
+    
+};
+
+Queue::Queue(){
+ front = NULL; 
+ rear = NULL;    
+}
+
+Queue::~Queue(){
+    Node*temp; 
+      while(front!=NULL) // might cause problems later
+        {
+          temp = front; 
+          front=front->next; 
+          delete temp;    
+    
+        }
+}
+
+
+bool Queue::empty(){
+     if(front==0)
+        return true;
+    else
+        return false;
+}
+
+
+bool Queue::full()
+{
+    if(rear=0)
+        return true;
+    else
+        return false;
+}
+
+
+int Queue::enqueue(const int &item)
+{
+    if(full())
+    {
+     cout << "Unable to insert item.";
+     return 0;     
+    }
+    else 
+    {
+     Node * current = new Node; 
+     current->item = item;  
+      count ++;
+      if(front==NULL)
+          front = current;
+      else 
+           rear->next=current; 
+       }
+       
+       rear = current; 
+       
+       return 0;         
+}
+    
+
+
+
+
+
+
+
+
