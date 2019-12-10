@@ -1,0 +1,86 @@
+// referenced old code, and cplusplus.com to build this 
+//referenced https://www.geeksforgeeks.org/priority-queue-using-linked-list/
+
+#include <iostream>
+
+using namespace std;
+
+class Queue
+{
+private:
+	struct Node { 
+    int item;
+    int priority;
+    struct Node* next };
+
+
+public:
+	Node* NewNode(int i, int p);
+	int enqueue(const int item, int p);
+	int dequeue();
+	bool empty();
+	int peek(Node** head);
+
+
+};
+
+
+
+int Queue::empty(Node** head) {
+	return *head == NULL;
+}
+
+
+int Queue::peek(Node** head) {
+	return (*head)->item;
+}
+
+void Queue::enqueue(Node** current, int i, int p)
+{
+	Node* start = *current;
+	Node* temp = newNode(i, p);
+
+	if (*current->priority > p) {
+
+		temp->next = *current;
+		*current = temp;
+	}
+	else
+	{
+		while (start->next != NULL &&
+			start->next->priority < p) {
+			start = start->next;
+
+		}
+	}
+	}
+
+	void Queue::dequeue(Node **head) {
+		Node* current = *head;
+		*head = *head->next;
+		delete current;
+
+	}
+
+	int Queue::NewNode(int i, int p) {
+		Node* current = (Node*)malloc(sizeof(Node));
+		current->item = i;
+		current->priority = p;
+		current->next = NULL;
+		return current;
+	}
+
+
+	int main() {
+		Node* demo = newNode(4, 1);
+		enqueue(&demo, 5, 2);
+		enqueue(&demo, 6, 3);
+		enqueue(&demo, 7, 0);
+
+		while (!empty(&demo)) {
+			cout << demo.peek();
+			dequeue(&demo);
+		}
+		return 0;
+	}
+
