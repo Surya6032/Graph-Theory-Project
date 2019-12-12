@@ -1,0 +1,140 @@
+// referenced old code, and cplusplus.com to build this 
+
+
+#include <iostream>
+
+using namespace std;
+template<class T>
+class Queue
+{
+private:
+    struct Node {T item; int priority; struct Node * next;}; 
+    Node * head;
+    Node * rear;
+    int count;
+    
+public:
+    NewNode(T i, int p, Node*head);
+    Queue();
+    ~Queue();
+    int enqueue(const int &item, int p); 
+    int dequeue();
+    bool full();
+    bool empty();
+    T peek (Node*head);
+
+    
+};
+template<class T>
+Queue::Queue(){
+ front = NULL; 
+ rear = NULL;    
+}
+/*
+Function:Queue
+Purpose:Queue constructor
+Return:Nothing
+*/
+template<class T>
+Queue::~Queue(){
+    Node*temp; 
+      while(head!=NULL) 
+        {
+          temp = front; 
+          front=front->next; 
+          delete temp;    
+    
+        }
+}
+/*
+Function:empty
+Purpose:To check if Queue is empty
+Return:Bool
+*/
+template<class T>
+bool Queue::empty(){
+     if(head==0)
+        return true;
+    else
+        return false;
+}
+
+/*
+Function:Peek
+Purpose:To return head of queue
+Return: templated
+*/
+template<class T>
+T Queue:: peek(Node*head){
+    return *head->item; 
+}
+/*
+Function:Enqueue
+Purpose:To put items into queue
+Return:Int 
+*/
+template<class T>
+int Queue::enqueue( Node*head,T i, int p)
+{
+    if(full())
+    {
+     cout << "Unable to insert item.";
+     return 0;     
+    }
+    else 
+    {Node*start =(*head);
+     Node * current = NewNode(i,p); 
+     if((*head)->priority>p){
+         current->next=*head
+         *head=temp; 
+     }
+     else{
+         while (start->next!=NULL&&start->next->priority<p){start =start->next}
+     }
+     current-next=start-next;
+     start->next=temp;
+       
+}
+/*
+Function:dequeue
+Purpose:to remove itmes from the queue
+Return: void
+*/
+template<class T>
+void Queue:: dequeue(Node*front){
+    Node*current=*head; 
+    *head=*head->next; 
+    delete current;
+
+}
+
+/*
+Function:NewNode
+Purpose:to insert itmes into the list 
+Return:int
+*/
+
+ template<class T>   
+int Queue::NewNode(int i, int p){
+    Node*current = (Node*)malloc(sizeof(Node));
+    current->item=i;n
+    current->priority=p;
+    current->next=NULL; 
+    return current; 
+}
+
+
+int main(){
+    Node*demo = newNode(4,1);
+    enqueue(demo 5,2);
+    enqueue(demo 6,3);
+    enqueue (demo 7,0); 
+
+    while (!empty(&demo)){
+        cout << " ", peek(&demo); 
+        dequeue(&demo);
+    }
+    return 0; 
+}
+
+
